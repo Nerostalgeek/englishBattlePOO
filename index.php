@@ -26,8 +26,6 @@ if (isset($_POST['create'])) // Si on a voulu créer un joueur.
     $joueur = new Joueur([ 'email' => $_POST['username'], 'password' => $_POST['password']]);
     if ($manager->login($joueur->email(), $joueur->password())) // Si celui-ci existe.
     {
-        //var_dump('$PWD', $joueur->password());
-        //$manager->check($joueur->password());
          header('Location: http://www.google.com/');
     } else {
         $message = 'Ce joueur n\'existe pas !'; // S'il n'existe pas, on affichera ce message.
@@ -77,8 +75,8 @@ if (isset($_POST['create'])) // Si on a voulu créer un joueur.
     <!--Horizontal Tab-->
     <div id="parentHorizontalTab_agile">
         <ul class="resp-tabs-list hor_1">
-            <li>LogIn</li>
-            <li>SignUp</li>
+            <li>Log in</li>
+            <li>Sign up</li>
         </ul>
         <div class="resp-tabs-container hor_1">
             <div class="w3_agile_login">
@@ -93,9 +91,6 @@ if (isset($_POST['create'])) // Si on a voulu créer un joueur.
                     </label>
                     <input type="submit" value="login" class="agileinfo" name="logIn"/>
                 </form>
-                <div class="login_w3ls">
-                    <a href="#">Forgot Password</a>
-                </div>
 
             </div>
             <div class="agile_its_registration">

@@ -1,0 +1,59 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: nestezet
+ * Date: 22/05/2018
+ * Time: 22:39
+ */
+
+class partie
+
+{
+    private $_id;
+    private $_idJoueur;
+
+    public function __construct(array $donnees)
+    {
+        $this->hydrate($donnees);
+    }
+
+// Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value) {
+            // On récupère le nom du setter correspondant à l'attribut.
+            $method = 'set' . ucfirst($key);
+            // Si le setter correspondant existe.
+
+            if (method_exists($this, $method)) {
+                // On appelle le setter.
+                $this->$method($value);
+            }
+        }
+    }
+
+    public function id()
+    {
+        return $this->_id;
+    }
+
+    public function idJoueur()
+    {
+        return $this->_idJoueur;
+    }
+
+
+    public function setId($id)
+    {
+        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        $this->_id = (int)$id;
+    }
+
+    public function setIdJoueur($idJoueur)
+    {
+        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        $this->_id = (int)$idJoueur;
+    }
+
+
+}

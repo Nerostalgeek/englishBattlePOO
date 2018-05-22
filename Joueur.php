@@ -5,7 +5,7 @@ class Joueur
     private $_id;
     private $_nom;
     private $_prenom;
-    private $_motDePasse;
+    private $_password;
     private $_email;
     private $_ville;
     private $_niveau;
@@ -22,12 +22,11 @@ class Joueur
         foreach ($donnees as $key => $value) {
             // On récupère le nom du setter correspondant à l'attribut.
             $method = 'set' . ucfirst($key);
-            var_dump("methode avant ", $method);
             // Si le setter correspondant existe.
+
             if (method_exists($this, $method)) {
                 // On appelle le setter.
                 $this->$method($value);
-                var_dump("methode setter", $this->$method($value));
             }
         }
     }
@@ -47,9 +46,9 @@ class Joueur
         return $this->_prenom;
     }
 
-    public function motDePasse()
+    public function password()
     {
-        return $this->_motDePasse;
+        return $this->_password;
     }
 
     public function email()
@@ -80,7 +79,6 @@ class Joueur
         // Dont la longueur est inférieure à 30 caractères.
         if (is_string($nom) && strlen($nom) <= 30) {
             $this->_nom = $nom;
-            var_dump("nom", $nom);
         }
     }
 
@@ -92,12 +90,12 @@ class Joueur
         }
     }
 
-    public function setMotDePasse($motDePasse)
+    public function setPassword($password)
     {
-        // On vérifie que le prenom comprend moins de 30 caractères, là aussi.
-        if (is_string($motDePasse) && strlen($motDePasse) <= 30) {
-            $this->_motDePasse = $motDePasse;
-        }
+        // On vérifie que le password comprend moins de 30 caractères, là aussi.
+
+            $this->_password = $password;
+
     }
 
     public function setEmail($email)
@@ -113,8 +111,10 @@ class Joueur
     public function setIdVille($ville)
     {
         // On vérifie que le prenom comprend moins de 30 caractères, là aussi.
-        if (is_int($ville)) {
-            $this->_ville = $ville;
+        if ($ville) {
+            trim($this->_ville = $ville, '"');
+        } else {
+            var_dump('probleme ville');
         }
     }
 
@@ -127,8 +127,8 @@ class Joueur
         }
     }
 
-    public function nomValide()
+    public function emailValide()
     {
-        return !empty($this->_nom);
+        return !empty($this->_email);
     }
 }

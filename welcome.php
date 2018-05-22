@@ -47,7 +47,11 @@ try {
         $(function () {
             $("#recherche").autocomplete({
                 source: "liste.php",
-                minLength: 3
+                minLength: 5
+            });
+            $("#idVille").autocomplete({
+                source: "idListe.php",
+                minLength: 1
             });
         });
     </script>
@@ -92,8 +96,9 @@ try {
                     <input type="password" name="Confirm Password" id="password2" required="required">
 
                     <label for="ville">Ville</label>
-                    <input type="text" name="idVille" required="required" id="recherche"/>
-
+                    <input type="text" name="ville" required="required" id="recherche"/>
+                    <label for="idVille"/>
+                    <input type="hidden" name="idVille" required="required" id="idVille"/>
                     <p>Niveau</p>
                     <select id="niveau">
                         <option value="débutant">Débutant</option>

@@ -6,7 +6,7 @@
  * Time: 22:39
  */
 
-class partie
+class Partie
 
 {
     private $_id;

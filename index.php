@@ -8,6 +8,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une aler
 
 $manager = new JoueurManager($db);
 
+
 if (isset($_POST['create'])) // Si on a voulu créer un joueur.
 {
 
@@ -19,14 +20,21 @@ if (isset($_POST['create'])) // Si on a voulu créer un joueur.
         unset($joueur);
     } else {
         // On crée un nouveau joueur.
+        $_SESSION['id'] = $joueur->id();
+        $_SESSION['nom'] =  $_POST['username'];
+        $_SESSION['prenom'] = $_POST['prenom'];
         $manager->add($joueur);
+
     }
 } elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un joueur.
 {
-    $joueur = new Joueur([ 'email' => $_POST['username'], 'password' => $_POST['password']]);
+    $joueur = new Joueur(['email' => $_POST['username'], 'password' => $_POST['password']]);
     if ($manager->login($joueur->email(), $joueur->password())) // Si celui-ci existe.
     {
-         header('Location: http://www.google.com/');
+        $_SESSION['id'] = $joueur->id();
+        $_SESSION['nom'] =  $_POST['username'];
+        $_SESSION['prenom'] = $_POST['prenom'];
+        header('Location: ./game.php');
     } else {
         $message = 'Ce joueur n\'existe pas !'; // S'il n'existe pas, on affichera ce message.
     }

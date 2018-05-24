@@ -13,7 +13,7 @@ class JoueurManager
     {
 
 
-        $q = $this->_db->prepare('INSERT INTO joueur(email, nom, prenom, password, idVille, niveau) VALUES(:email, :nom, :prenom, :password, :idVille, :niveau)');
+        $q = $this->_db->prepare('INSERT INTO Joueur(email, nom, prenom, password, idVille, niveau) VALUES(:email, :nom, :prenom, :password, :idVille, :niveau)');
         $q->bindValue(':email', $joueur->email());
         $q->bindValue(':nom', $joueur->nom());
         $q->bindValue(':prenom', $joueur->prenom());
@@ -30,24 +30,30 @@ class JoueurManager
 
     public function delete(Joueur $joueur)
     {
-        $this->_db->exec('DELETE FROM joueur WHERE id = ' . $joueur->id());
+        $this->_db->exec('DELETE FROM Joueur WHERE id = ' . $joueur->id());
     }
 
-    public function get($id)
+    public function get($info)
     {
-        $id = (int)$id;
 
-        $q = $this->_db->query('SELECT id, email, nom, prenom, password, idVille, niveau FROM joueur WHERE id = ' . $id);
-        $donnees = $q->fetch(PDO::FETCH_ASSOC);
+        if (is_int($info)) {
+            $q = $this->_db->query('SELECT id, nom, degats FROM personnages WHERE id = ' . $info);
+            $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-        return new Joueur($donnees);
+            return new Joueur($donnees);
+        } else {
+            $q = $this->_db->prepare('SELECT id, email, nom, prenom, password, idVille, niveau FROM Joueur WHERE email = ' . $info);
+            $q->execute([':nom' => $info]);
+
+            return new Joueur($q->fetch(PDO::FETCH_ASSOC));
+        }
     }
 
     public function getList()
     {
         $Joueur = [];
 
-        $q = $this->_db->query('SELECT id, email, nom, prenom, password, idVille, niveau FROM joueur ORDER BY nom');
+        $q = $this->_db->query('SELECT id, email, nom, prenom, password, idVille, niveau FROM Joueur ORDER BY nom');
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
             $Joueur[] = new Joueur($donnees);
@@ -58,7 +64,7 @@ class JoueurManager
 
     public function update(Joueur $joueur)
     {
-        $q = $this->_db->prepare('UPDATE joueur SET email = :email, nom = :nom, prenom = :prenom, password = :password,  idVille = :idVille, niveau = :niveau WHERE id = :id');
+        $q = $this->_db->prepare('UPDATE Joueur SET email = :email, nom = :nom, prenom = :prenom, password = :password,  idVille = :idVille, niveau = :niveau WHERE id = :id');
 
         $q->bindValue(':email', $joueur->email());
         $q->bindValue(':nom', $joueur->nom());
@@ -80,21 +86,41 @@ class JoueurManager
     {
         // Sinon, c'est qu'on veut vérifier que l'email existe ou pas.
 
-        $q = $this->_db->prepare('SELECT COUNT(*) FROM joueur WHERE email = :email');
+        $q = $this->_db->prepare('SELECT COUNT(*) FROM Joueur WHERE email = :email');
         $q->execute([':email' => $info]);
 
         return (bool)$q->fetchColumn();
+    }
+
+    public function checkIdSession($email)
+    {
+        $Joueur = [];
+
+        $q = $this->_db->query('SELECT id, email, nom, prenom, password, idVille, niveau FROM Joueur WHERE email = ' . $email);
+
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+            $Joueur[] = new Joueur($donnees);
+        }
+
+        return new Joueur($donnees);
     }
 
     function login($username, $password)
     {
         // Sinon, c'est qu'on veut vérifier que l'email existe ou pas.
 
-        $query = $this->_db->prepare('SELECT COUNT(*) FROM joueur WHERE email = :email AND password = :password');
+        $query = $this->_db->prepare('SELECT * FROM Joueur WHERE email = :email AND password = :password');
 
         $query->execute([':email' => $username, ':password' => $password]);
         //var_dump("really => =>", $query->fetchColumn());
-        return (bool)$query->fetchColumn();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $count = $query->rowCount();
+
+        if ($count == 1) {
+            session_start();
+            $_SESSION['user_id'] = $result['id'];
+            return true;
+        }
 
     }
 }

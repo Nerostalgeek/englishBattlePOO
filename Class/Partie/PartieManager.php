@@ -33,7 +33,7 @@ class PartieManager
     {
         $id = (int)$id;
 
-        $q = $this->_db->query('SELECT id, email, nom, prenom, password, idVille, niveau FROM partie WHERE id = ' . $id);
+        $q = $this->_db->query('SELECT id, idJoueur FROM partie WHERE id = ' . $id);
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
         return new partie($donnees);

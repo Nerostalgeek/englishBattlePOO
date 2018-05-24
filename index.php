@@ -1,6 +1,6 @@
 <?php
-require_once('joueur.php');
-require_once('joueurManager.php');
+require('Class/Joueur/Joueur.php');
+require('Class/Joueur/JoueurManager.php');
 session_start(); // On appelle session_start() APRÈS avoir enregistré l'autoload.
 
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
@@ -9,7 +9,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une aler
 $manager = new JoueurManager($db);
 
 
-if (isset($_POST['create'])) // Si on a voulu créer un joueur.
+if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 {
 
     $joueur = new Joueur(['nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'email' => $_POST['email'],
@@ -19,25 +19,26 @@ if (isset($_POST['create'])) // Si on a voulu créer un joueur.
         var_dump($message = 'Cet Email est déjà pris.');
         unset($joueur);
     } else {
-        // On crée un nouveau joueur.
+        // On crée un nouveau Joueur.
         $_SESSION['id'] = $joueur->id();
-        $_SESSION['nom'] =  $_POST['username'];
+        var_dump("SESSION ID CREATE", $_SESSION['id']);
+        $_SESSION['email'] = $_POST['username'];
         $_SESSION['prenom'] = $_POST['prenom'];
         $manager->add($joueur);
 
     }
-} elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un joueur.
+} elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un Joueur.
 {
     $joueur = new Joueur(['email' => $_POST['username'], 'password' => $_POST['password']]);
     if ($manager->login($joueur->email(), $joueur->password())) // Si celui-ci existe.
     {
-        $_SESSION['id'] = $joueur->id();
-        $_SESSION['nom'] =  $_POST['username'];
-        $_SESSION['prenom'] = $_POST['prenom'];
+        $_SESSION['email'] = $_POST['username'];
         header('Location: ./game.php');
+
     } else {
-        $message = 'Ce joueur n\'existe pas !'; // S'il n'existe pas, on affichera ce message.
+        $message = 'Ce Joueur n\'existe pas !'; // S'il n'existe pas, on affichera ce message.
     }
+
 }
 ?>
 

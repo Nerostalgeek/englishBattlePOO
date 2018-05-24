@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nestezet
- * Date: 22/05/2018
- * Time: 22:39
- */
 
 class Question
 
@@ -75,43 +69,43 @@ class Question
 
     public function setId($id)
     {
-        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_id = (int)$id;
     }
 
     public function setIdPartie($idPartie)
     {
-        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_idPartie = (int)$idPartie;
     }
 
     public function setIdVerbe($idVerbe)
     {
-        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_idPartie = (int)$idVerbe;
     }
 
     public function setReponsePreterit($reponsePreterit)
     {
-        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_reponsePreterit = (int)$reponsePreterit;
     }
 
     public function setReponseParticipe($reponseParticipe)
     {
-        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_reponseParticipe = (int)$reponseParticipe;
     }
 
     public function setDateEnvoie($dateEnvoie)
     {
-        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_dateEnvoie = (int)$dateEnvoie;
     }
 
     public function setDateReponse($dateReponse)
     {
-        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_dateReponse = (int)$dateReponse;
     }
 }

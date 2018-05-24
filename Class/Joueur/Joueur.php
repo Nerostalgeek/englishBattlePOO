@@ -69,7 +69,7 @@ class Joueur
 
     public function setId($id)
     {
-        // L'identifiant du joueur sera, quoi qu'il arrive, un nombre entier.
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_id = (int)$id;
     }
 

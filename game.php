@@ -1,5 +1,24 @@
 <?php
+require('Class/Joueur/Joueur.php');
+require('Class/Joueur/JoueurManager.php');
+require('Class/Partie/Partie.php');
+require('Class/Partie/PartieManager.php');
+require('Class/Question/Question.php');
+require('Class/Question/QuestionManager.php');
+require('Class/Verbe/Verbe.php');
+require('Class/Verbe/VerbeManager.php');
 session_start();
+
+$db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
+$manager = new JoueurManager($db);
+if (isset($_SESSION['user_id'])) {
+// $manager->get($_SESSION['email']);
+    var_dump("SESSION USERID => => =>", $_SESSION['user_id']);
+
+//var_dump("JOUEUR IN GAME", $joueur);
+}
+//var_dump("SESSION ID => => =>", $_SESSION['id']);
 ?>
 
 
@@ -30,7 +49,7 @@ session_start();
     <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 </head>
 <body class="bg agileinfo">
-<h1 class="agile_head text-center"> <?php echo "coucou " .  print_r($_SESSION['nom']);?> English Battle</h1>
+<h1 class="agile_head text-center"> <?php echo "coucou " . var_dump("SESSION => =>", $_SESSION['email']);?></h1>
 <div class="w3layouts_main wrap">
     <!--Horizontal Tab-->
     <div id="parentHorizontalTab_agile">

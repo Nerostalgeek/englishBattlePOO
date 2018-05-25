@@ -27,6 +27,7 @@ class Partie
 
             if (method_exists($this, $method)) {
                 // On appelle le setter.
+                //var_dump("in baby",$this->$method($value));
                 $this->$method($value);
             }
         }
@@ -52,7 +53,7 @@ class Partie
     public function setIdJoueur($idJoueur)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_id = (int)$idJoueur;
+        $this->_idJoueur = (int)$idJoueur;
     }
 
 

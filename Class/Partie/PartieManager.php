@@ -14,14 +14,13 @@ class PartieManager
 
 
         $q = $this->_db->prepare('INSERT INTO partie (idJoueur) VALUES(:idJoueur)');
-        $q->bindValue(':idJoueur', $partie->idJoueur());
+        $q->bindValue(':idJoueur', $partie->idJoueur(), PDO::PARAM_INT);
 
 
         $q->execute();
         $partie->hydrate([
             'id' => $this->_db->lastInsertId(),
         ]);
-        var_dump("INTO ADD =>", $partie);
     }
 
     public function delete(Partie $partie)

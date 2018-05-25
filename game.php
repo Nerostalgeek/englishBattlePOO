@@ -11,14 +11,10 @@ session_start();
 
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
-$manager = new JoueurManager($db);
 if (isset($_SESSION['user_id'])) {
-// $manager->get($_SESSION['email']);
-    var_dump("SESSION USERID => => =>", $_SESSION['user_id']);
+    var_dump("ca marche =>" , $_SESSION['partieId']);
 
-//var_dump("JOUEUR IN GAME", $joueur);
 }
-//var_dump("SESSION ID => => =>", $_SESSION['id']);
 ?>
 
 

@@ -1,13 +1,15 @@
 <?php
 require('Class/Joueur/Joueur.php');
 require('Class/Joueur/JoueurManager.php');
+require('Class/Partie/Partie.php');
+require('Class/Partie/PartieManager.php');
 session_start(); // On appelle session_start() APRÈS avoir enregistré l'autoload.
 
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
 
 $manager = new JoueurManager($db);
-
+$partieManager = new PartieManager($db);
 
 if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 {
@@ -33,7 +35,14 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
     if ($manager->login($joueur->email(), $joueur->password())) // Si celui-ci existe.
     {
         $_SESSION['email'] = $_POST['username'];
-        header('Location: ./game.php');
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id'];
+            $partie = new Partie(['idJoueur' => $userId]);
+            $partieManager->add($partie);
+            $_SESSION['partieId'] = $partie->id();
+            header('Location: ./game.php');
+
+        }
 
     } else {
         $message = 'Ce Joueur n\'existe pas !'; // S'il n'existe pas, on affichera ce message.

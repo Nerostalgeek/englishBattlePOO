@@ -25,7 +25,6 @@ class JoueurManager
         $joueur->hydrate([
             'id' => $this->_db->lastInsertId(),
         ]);
-        var_dump("INTO ADD =>", $joueur);
     }
 
     public function delete(Joueur $joueur)

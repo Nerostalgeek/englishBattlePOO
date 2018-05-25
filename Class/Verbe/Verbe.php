@@ -12,7 +12,7 @@ class Verbe
     private $_id;
     private $_baseVerbale;
     private $_preterit;
-    private $_participe;
+    private $_participePasse;
     private $_traduction;
 
     public function __construct(array $donnees)
@@ -50,9 +50,9 @@ class Verbe
         return $this->_preterit;
     }
 
-    public function participe()
+    public function participePasse()
     {
-        return $this->_participe;
+        return $this->_participePasse;
     }
 
     public function traduction()
@@ -75,19 +75,19 @@ class Verbe
     public function setPreterit($preterit)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_preterit = (int)$preterit;
+        $this->_preterit = $preterit;
     }
 
-    public function setParticipe($participe)
+    public function setParticipePasse($participePasse)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_participe = (int)$participe;
+        $this->_participepasse = $participePasse;
     }
 
     public function setTraduction($traduction)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_traduction = (int)$traduction;
+        $this->_traduction = $traduction;
     }
 
 

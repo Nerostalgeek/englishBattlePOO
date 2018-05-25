@@ -32,7 +32,7 @@ class VerbeManager
     {
         $verbe = [];
 
-        $q = $this->_db->query('SELECT id, baseVerbale, preterit, participePasse, traduction FROM verbe');
+        $q = $this->_db->query('SELECT * FROM verbe ORDER BY RAND()');
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
             $verbe[] = new Verbe($donnees);

@@ -39,7 +39,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
             $userId = $_SESSION['user_id'];
             $partie = new Partie(['idJoueur' => $userId]);
             $partieManager->add($partie);
-            $_SESSION['partieId'] = $partie->id();
+              $_SESSION['partieId'] = $partie->id();
             header('Location: ./game.php');
 
         }

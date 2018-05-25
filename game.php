@@ -11,8 +11,9 @@ session_start();
 
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
-if (isset($_SESSION['user_id'])) {
-    var_dump("ca marche =>" , $_SESSION['partieId']);
+if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
+    $manager = new VerbeManager($db);
+    print_r( $_SESSION['verbe'] = $manager->getList());
 
 }
 ?>

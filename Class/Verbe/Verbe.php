@@ -81,7 +81,7 @@ class Verbe
     public function setParticipePasse($participePasse)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_participepasse = $participePasse;
+        $this->_participePasse = $participePasse;
     }
 
     public function setTraduction($traduction)

@@ -34,7 +34,7 @@ class VerbeManager
 
         $q = $this->_db->query('SELECT * FROM verbe ORDER BY RAND()');
 
-        while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+        while ($donnees = $q->fetch()) {
             $verbe[] = new Verbe($donnees);
         }
 

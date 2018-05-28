@@ -17,11 +17,11 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
 
 
     $fp = fopen('verbes.json', 'w');
-    fwrite($fp, print_r($verbes, TRUE));
+    fwrite($fp, $verbes);
     fclose($fp);
     $_SESSION['verbe'] = $verbes;
-    print_r($verbes[0]->baseVerbale());
-    $indexArray = count($_SESSION['verbe']);
+    //print_r($verbes[0]->baseVerbale());
+    // $indexArray = count($verbes);
 
 }
 ?>
@@ -65,7 +65,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
                 <p>Base verbale</p>
                 <label>
                     <input type="text" id="baseVerbale" name="base" required="required"
-                           value="<?php echo $verbes[0]->baseVerbale(); ?>"
+                           value=""
                            disabled/>
                 </label>
                 <p>Preterit</p>
@@ -88,7 +88,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
         <script type="application/javascript">
             $('#submit').click(function () {
                 var baseVerbale = $('#baseVerbale').val();
-                //alert(baseVerbale);
+                console.log('file => ==> ', readTextFile('verbes.json'));
                 return false; //Empêche le formulaire d'être soumis
             });
         </script>

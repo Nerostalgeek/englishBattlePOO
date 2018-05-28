@@ -5,7 +5,7 @@ function readTextFile(file) {
         if (rawFile.readyState === 4) {
             if (rawFile.status === 200 || rawFile.status === 0) {
                 allText = rawFile.responseText;
-                return allText;
+                console.log(allText);
             }
         }
     };
@@ -13,7 +13,3 @@ function readTextFile(file) {
 }
 
 
-var output = readTextFile('verbes.json');
-output.forEach(function(element) {
-    console.log(element);
-});

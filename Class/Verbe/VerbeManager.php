@@ -17,7 +17,6 @@ class VerbeManager
     }
 
 
-
     public function get($id)
     {
         $id = (int)$id;
@@ -34,11 +33,11 @@ class VerbeManager
 
         $q = $this->_db->query('SELECT * FROM verbe ORDER BY RAND()');
 
-        while ($donnees = $q->fetch()) {
-            $verbe[] = new Verbe($donnees);
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
+            $verbe[] = $donnees;
         }
+        return json_encode($verbe);
 
-        return $verbe;
     }
 
     public function setDb(PDO $db)

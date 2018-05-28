@@ -56,7 +56,6 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 <html>
 <head>
     <title>English Battle</title>
-    <!-- custom-theme -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="application/x-javascript"> addEventListener("load", function () {
@@ -66,15 +65,23 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
         function hideURLbar() {
             window.scrollTo(0, 1);
         } </script>
-    <!-- //custom-theme -->
+    <!-- //Bootstrap-Theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- //Custom-theme -->
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <!-- js -->
+    <!--// Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Courgette|Montserrat:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script
             src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
             crossorigin="anonymous"></script>
-
     <script>
         $(function () {
             $("#recherche").autocomplete({
@@ -87,9 +94,22 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
     <link rel="stylesheet" type="text/css" href="css/easy-responsive-tabs.css "/>
     <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 </head>
-<body class="bg agileinfo">
-<h1 class="agile_head text-center"> English Battle</h1>
-<div class="w3layouts_main wrap">
+<body class="agileinfo">
+    <div class="london-bg container-fluid">
+        <div class="container blur-box">
+            <h1 class="main-title text-center">English Battle</h1>
+            <h2 class="subtitle text-center">Let's test your English Level !</h2>
+        </div>
+    </div>
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 blue-bg p-5 text-center">
+            <h3>We are English Battle !</h3>
+            <img src="./images/english-flag.jpg" class="img-fluid mt-3 mb-3" alt="english flag"/>
+            <p class="mt-5 text-left">Venez découvrir un jeu éducatif, grâce auquel les verbes irréguliers n'auront plus de secrets pour vous ! Niveau débutant, intermédiaire ou confirmé, venez tester vos connaissances et améliorez vote anglais tout en vous amusant.
+        </div>
+        <div class="col-lg-8">
+            <div class="w3layouts_main wrap">
     <!--Horizontal Tab-->
     <div id="parentHorizontalTab_agile">
         <ul class="resp-tabs-list hor_1">
@@ -149,6 +169,9 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
     </div>
     <!-- //Horizontal Tab -->
 </div>
+        </div>
+    </div>
+    </div>
 <div class="agileits_w3layouts_copyright text-center">
     <p>© 2018 English Battle Inc. All rights reserved | Design by Jouclard</p>
 </div>

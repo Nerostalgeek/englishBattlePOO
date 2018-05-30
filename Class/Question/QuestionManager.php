@@ -18,13 +18,12 @@ class QuestionManager
     {
 
 
-        $q = $this->_db->prepare('INSERT INTO question (idPartie, idVerbe, reponsePreterit, reponseParticipePasse, dateEnvoie, dateReponse) VALUES(:idPartie, :idVerbe, :reponsePreterit, :reponseParticipePasse, :dateEnvoie, :dateReponse)');
+        $q = $this->_db->prepare('INSERT INTO question (idPartie, idVerbe, reponsePreterit, reponseParticipePasse, dateReponse) VALUES(:idPartie, :idVerbe, :reponsePreterit, :reponseParticipePasse, :dateReponse)');
         $q->bindValue(':idPartie', $question->idPartie(), PDO::PARAM_INT);
         $q->bindValue(':idVerbe', $question->idVerbe(), PDO::PARAM_INT);
         $q->bindValue(':reponsePreterit', $question->reponsePreterit());
-        $q->bindValue(':reponseParticipePasse', $question->reponseParticipe());
-        $q->bindValue(':dateEnvoie', $question->dateEnvoie());
-        $q->bindValue(':dateReponse', $question->dateReponse());
+        $q->bindValue(':reponseParticipePasse', $question->reponseParticipePasse());
+        $q->bindValue(':dateReponse', $question->dateEnvoie());
 
 
         $q->execute();

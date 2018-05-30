@@ -51,7 +51,7 @@ class Question
         return $this->_reponsePreterit;
     }
 
-    public function reponseParticipe()
+    public function reponseParticipePasse()
     {
         return $this->_reponseParticipePasse;
     }
@@ -82,7 +82,7 @@ class Question
     public function setIdVerbe($idVerbe)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_idPartie = (int)$idVerbe;
+        $this->_idVerbe = (int)$idVerbe;
     }
 
     public function setReponsePreterit($reponsePreterit)
@@ -91,7 +91,7 @@ class Question
         $this->_reponsePreterit = $reponsePreterit;
     }
 
-    public function setReponseParticipe($reponseParticipe)
+    public function setReponseParticipePasse($reponseParticipe)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_reponseParticipePasse = $reponseParticipe;

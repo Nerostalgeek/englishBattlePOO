@@ -7,7 +7,7 @@ class Question
     private $_idPartie;
     private $_idVerbe;
     private $_reponsePreterit;
-    private $_reponseParticipe;
+    private $_reponseParticipePasse;
     private $_dateEnvoie;
     private $_dateReponse;
 
@@ -53,7 +53,7 @@ class Question
 
     public function reponseParticipe()
     {
-        return $this->_reponseParticipe;
+        return $this->_reponseParticipePasse;
     }
 
     public function dateEnvoie()
@@ -88,24 +88,24 @@ class Question
     public function setReponsePreterit($reponsePreterit)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_reponsePreterit = (int)$reponsePreterit;
+        $this->_reponsePreterit = $reponsePreterit;
     }
 
     public function setReponseParticipe($reponseParticipe)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_reponseParticipe = (int)$reponseParticipe;
+        $this->_reponseParticipePasse = $reponseParticipe;
     }
 
     public function setDateEnvoie($dateEnvoie)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_dateEnvoie = (int)$dateEnvoie;
+        $this->_dateEnvoie = $dateEnvoie;
     }
 
     public function setDateReponse($dateReponse)
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_dateReponse = (int)$dateReponse;
+        $this->_dateReponse = $dateReponse;
     }
 }

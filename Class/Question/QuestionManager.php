@@ -9,13 +9,18 @@ class QuestionManager
         $this->setDb($db);
     }
 
+    public function setDb(PDO $db)
+    {
+        $this->_db = $db;
+    }
+
     public function add(Question $question)
     {
 
 
         $q = $this->_db->prepare('INSERT INTO question (idPartie, idVerbe, reponsePreterit, reponseParticipePasse, dateEnvoie, dateReponse) VALUES(:idPartie, :idVerbe, :reponsePreterit, :reponseParticipePasse, :dateEnvoie, :dateReponse)');
-        $q->bindValue(':idPartie', $question->idPartie());
-        $q->bindValue(':idVerbe', $question->idVerbe());
+        $q->bindValue(':idPartie', $question->idPartie(), PDO::PARAM_INT);
+        $q->bindValue(':idVerbe', $question->idVerbe(), PDO::PARAM_INT);
         $q->bindValue(':reponsePreterit', $question->reponsePreterit());
         $q->bindValue(':reponseParticipePasse', $question->reponseParticipe());
         $q->bindValue(':dateEnvoie', $question->dateEnvoie());
@@ -26,7 +31,6 @@ class QuestionManager
         $question->hydrate([
             'id' => $this->_db->lastInsertId(),
         ]);
-        var_dump("INTO ADD =>", $question);
     }
 
     public function delete(Question $question)
@@ -66,11 +70,6 @@ class QuestionManager
         $q->execute();
     }
 
-    public function setDb(PDO $db)
-    {
-        $this->_db = $db;
-    }
-
     public function exists($info)
     {
         // Sinon, c'est qu'on veut vérifier que l'email existe ou pas.
@@ -80,5 +79,4 @@ class QuestionManager
 
         return (bool)$q->fetchColumn();
     }
-
 }

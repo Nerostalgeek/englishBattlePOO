@@ -34,9 +34,23 @@ class VerbeManager
         $q = $this->_db->query('SELECT * FROM verbe ORDER BY RAND()');
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {
-            $verbe[] = $donnees;
+            $verbe[] = new Verbe($donnees);
         }
-        return json_encode($verbe);
+        return $verbe;
+
+    }
+
+    function checkAnswer($preterit, $participe)
+    {
+        $query = $this->_db->prepare('SELECT * FROM verbe WHERE preterit = :preterit AND participePasse = :participePasse');
+
+        $query->execute([':preterit' => $preterit, ':participePasse' => $participe]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $count = $query->rowCount();
+
+        if ($count == 1) {
+            return true;
+        }
 
     }
 

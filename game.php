@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 require('Class/Joueur/Joueur.php');
 require('Class/Joueur/JoueurManager.php');
 require('Class/Partie/Partie.php');
@@ -11,19 +12,30 @@ session_start();
 
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
-if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
-    $manager = new VerbeManager($db);
-    $verbes = $manager->getList();
-
-
-    $fp = fopen('verbes.json', 'w');
-    fwrite($fp, $verbes);
-    fclose($fp);
-    $_SESSION['verbe'] = $verbes;
-    //print_r($verbes[0]->baseVerbale());
-    // $indexArray = count($verbes);
-
+if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
+    // It is the first time. We add it to the list of "seen" nonces.
+    $_SESSION['posts'][] = $_POST['nonce'];
+    if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
+        $questionManager = new QuestionManager($db);
+        $dateEnvoie = time();
+        if (isset($_POST['envoyer']) && isset($_SESSION['verbe'])) {
+            //var_dump($_SESSION['verbe'][$_SESSION['currentVerbe']]->id());
+            $verbeMananager = new VerbeManager($db);
+            if ($verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse'])) {
+                $_SESSION['currentVerbe'] += 1;
+                var_dump($_SESSION['currentVerbe']);
+                $question = new Question(['idPartie' => $_SESSION['partieId'], 'idVerbe' => $_SESSION['verbe'][$_SESSION['currentVerbe']]->id(),
+                    'reponsePreterit' => $_POST['preterit'], 'reponseParticipePasse' => $_POST['participePasse'],
+                    'dateEnvoie' => $dateEnvoie, 'dateReponse' => time()]);
+                var_dump($question);
+                $questionManager->add($question);
+            }
+        }
+    }
+} else {
+    print '<div class="errormessage">Please do not resubmit.</div>';
 }
+
 ?>
 
 
@@ -34,6 +46,8 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
     <!-- custom-theme -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="/js/game.js"></script>
+
     <script type="application/x-javascript"> addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
@@ -54,29 +68,29 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
     <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 </head>
 <body class="bg agileinfo">
-<h1 class="agile_head text-center"> <?php echo "coucou " . var_dump("SESSION => =>", $_SESSION['email']); ?></h1>
+<h1 class="agile_head text-center"> <?php echo $_SESSION['email']; ?></h1>
 <div class="w3layouts_main wrap">
     <!--Horizontal Tab-->
     <div id="parentHorizontalTab_agile">
         <div class="resp-tabs-container hor_1">
             <div class="w3_agile_login">
-                <form action="#" method="post" class="agile_form" name="question"
-                ">
-                <p>Base verbale</p>
-                <label>
-                    <input type="text" id="baseVerbale" name="base" required="required"
-                           value=""
-                           disabled/>
-                </label>
-                <p>Preterit</p>
-                <label>
-                    <input type="text" name="preterit" required="required"/>
-                </label>
-                <p>Participe passé</p>
-                <label>
-                    <input type="text" name="participe" required="required"/>
-                </label>
-                <input type="submit" value="Envoyer" class="agileinfo" id="submit" name="envoyer"/>
+                <form action="#" method="post" class="agile_form" name="question">
+                    <input type="hidden" name="nonce" value="<?php echo uniqid(); ?>"/>
+                    <p>Base verbale</p>
+                    <label>
+                        <input type="text" id="baseVerbale" name="baseVerbale" required="required"
+                               value="<?php echo $_SESSION['verbe'][$_SESSION['currentVerbe']]->baseVerbale() ?>"
+                               disabled/>
+                    </label>
+                    <p>Preterit</p>
+                    <label>
+                        <input type="text" name="preterit" required="required"/>
+                    </label>
+                    <p>Participe passé</p>
+                    <label>
+                        <input type="text" name="participePasse" required="required"/>
+                    </label>
+                    <input type="submit" value="Envoyer" class="agileinfo" id="submit" name="envoyer"/>
                 </form>
 
             </div>
@@ -85,16 +99,8 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
         <div class="agileits_w3layouts_copyright text-center">
             <p>© 2018 English Battle Inc. All rights reserved </p>
         </div>
-        <script type="application/javascript">
-            $('#submit').click(function () {
-                var baseVerbale = $('#baseVerbale').val();
-                console.log('file => ==> ', readTextFile('verbes.json'));
-                return false; //Empêche le formulaire d'être soumis
-            });
-        </script>
         <!--tabs-->
         <script src="js/easyResponsiveTabs.js"></script>
-        <script src="/js/search.js"></script>
         <!--//tabs-->
 </body>
 </html>

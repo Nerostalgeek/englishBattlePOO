@@ -3,6 +3,8 @@ require('Class/Joueur/Joueur.php');
 require('Class/Joueur/JoueurManager.php');
 require('Class/Partie/Partie.php');
 require('Class/Partie/PartieManager.php');
+require('Class/Verbe/Verbe.php');
+require('Class/Verbe/VerbeManager.php');
 session_start(); // On appelle session_start() APRÈS avoir enregistré l'autoload.
 
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
@@ -10,6 +12,8 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une aler
 
 $manager = new JoueurManager($db);
 $partieManager = new PartieManager($db);
+
+
 
 if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 {
@@ -27,7 +31,6 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
         $_SESSION['email'] = $_POST['username'];
         $_SESSION['prenom'] = $_POST['prenom'];
         $manager->add($joueur);
-
     }
 } elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un Joueur.
 {
@@ -39,6 +42,11 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
             $userId = $_SESSION['user_id'];
             $partie = new Partie(['idJoueur' => $userId]);
             $partieManager->add($partie);
+            $verbeManager = new VerbeManager($db);
+            $verbes = $verbeManager->getList();
+            $_SESSION['verbe'] = $verbes;
+            $_SESSION['currentVerbe'] = 0;
+
               $_SESSION['partieId'] = $partie->id();
             header('Location: ./game.php');
 

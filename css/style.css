@@ -33,7 +33,7 @@ h2
     font-weight: 400;
     font-size: 35px;
     padding-top: 20px;
-    color: #00173f;
+    color: #fff;
 }
 
 h3
@@ -44,11 +44,22 @@ h3
     padding: 20px 0;
 }
 
+a
+{
+    color: #00173f;
+    font-weight: 700;
+}
+
+a:hover
+{
+    color: #00173f;
+}
+
 .london-bg {
-    background: url(../images/banner-bg2.jpg) no-repeat;
+    background: url(../images/banner-bg.jpg) no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    padding: 125px 0px;
+    padding: 80px 0px;
 }
 
 .blue-bg
@@ -56,10 +67,51 @@ h3
     background-color: #00173f;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link 
+{
+    background-color: #00173f;
+}
+
+.nav-pills .nav-link {
+    border-radius: 0;
+}
+
+.nav-link {
+    padding: 1rem 1rem;
+}
+
+.btn-red
+{
+    background-color: #B40406;
+    border-color: #B40406;
+    color: #fff;
+}
+
+.btn-group-lg > .btn, .btn-lg 
+{
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 0;
+}
+
+form label
+{
+    color: #00173f;
+}
+
+.form-control-lg, .input-group-lg > .form-control, .input-group-lg > .input-group-append > .btn, .input-group-lg > .input-group-append > .input-group-text, .input-group-lg > .input-group-prepend > .btn, .input-group-lg > .input-group-prepend > .input-group-text 
+{
+    font-size: 1.50rem;
+    margin-top: 4px;
+}
+
+footer
+{
+    font-size: 1.2rem;
+}
 
 
-
-// Small devices (landscape phones, 576px and up)
+/*// Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) { 
     h1
     {
@@ -71,7 +123,7 @@ h3
     }
  }
 
-// Medium devices (tablets, 768px and up)
+/*// Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) { 
     h1
     {
@@ -83,7 +135,7 @@ h3
     }
  }
 
-// Large devices (desktops, 992px and up)
+/*// Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) { 
     h1
     {
@@ -95,6 +147,6 @@ h3
     }
  }
 
-// Extra large devices (large desktops, 1200px and up)
+/*// Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) { ... }
 

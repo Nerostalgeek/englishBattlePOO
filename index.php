@@ -94,87 +94,85 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
     <link rel="stylesheet" type="text/css" href="css/easy-responsive-tabs.css "/>
     <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 </head>
-<body class="agileinfo">
+<body>
     <div class="london-bg container-fluid">
         <div class="container blur-box">
             <h1 class="main-title text-center">English Battle</h1>
             <h2 class="subtitle text-center">Let's test your English Level !</h2>
         </div>
     </div>
-    <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4 blue-bg p-5 text-center">
+    <div class="d-flex">
+        <div class="col-md-4 text-center d-none d-md-block p-0 blue-bg p-5 d-flex align-items-center">
             <h3>We are English Battle !</h3>
             <img src="./images/english-flag.jpg" class="img-fluid mt-3 mb-3" alt="english flag"/>
-            <p class="mt-5 text-left">Venez découvrir un jeu éducatif, grâce auquel les verbes irréguliers n'auront plus de secrets pour vous ! Niveau débutant, intermédiaire ou confirmé, venez tester vos connaissances et améliorez vote anglais tout en vous amusant.
+            <p class="mt-5 text-left">Venez découvrir un jeu éducatif, grâce auquel les verbes irréguliers n'auront plus de secrets pour vous ! Niveau débutant, intermédiaire ou confirmé, venez tester vos connaissances et améliorez vote anglais tout en vous amusant!</p>
         </div>
-        <div class="col-lg-8">
-            <div class="w3layouts_main wrap">
-    <!--Horizontal Tab-->
-    <div id="parentHorizontalTab_agile">
-        <ul class="resp-tabs-list hor_1">
-            <li>Log in</li>
-            <li>Sign up</li>
-        </ul>
-        <div class="resp-tabs-container hor_1">
-            <div class="w3_agile_login">
-                <form action="#" method="post" class="agile_form" name="login">
-                    <p>Email</p>
-                    <label>
-                        <input type="email" name="username" required="required"/>
-                    </label>
-                    <p>Password</p>
-                    <label>
-                        <input type="password" name="password" required="required" class="password"/>
-                    </label>
-                    <input type="submit" value="login" class="agileinfo" name="logIn"/>
-                </form>
-
+        <div class="col-md-8 d-flex align-items-center">
+            <div class="p-5">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item mr-3">
+                    <a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Se connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">S'inscrire</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active pt-4" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+                    <form action="#" method="post" name="login">
+                        <div class="form-group mb-4">
+                            <label for="email">Adresse Email</label>
+                            <input type="email" class="form-control form-control-lg" name="username" required="required" placeholder="Entrez votre adresse email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control form-control-lg" name="password" required="required" placeholder="Entrez votre adresse email"/>
+                        </div>
+                            <button type="submit" value="login" name="logIn" class="btn btn-red btn-lg mt-4">Submit</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <form action="#" method="post" name="subscribe">
+                        <div class="form-group mb-4">
+                            <label for="nom">Nom</label>
+                            <input type="text" class="form-control form-control-lg" name="nom" required="required" placeholder="Entrez votre nom"/>
+                        </div>
+                        <div class="form-group mb-4">
+                        <label for="prenom">Prénom</label>
+                            <input type="text" class="form-control form-control-lg" name="prenom" required="required" placeholder="Entrez votre prénom"/>
+                        </div>
+                        <div class="form-group mb-4">
+                        <label for="email">Email</label>
+                            <input type="email" class="form-control form-control-lg" name="email" required="required" placeholder="Entrez votre email"/>
+                        </div>
+                        <div class="form-group mb-4">
+                        <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control form-control-lg" name="password" id="password1" required="required" placeholder="Entrez votre mot de passe">
+                        </div>
+                        <div class="form-group mb-4">
+                        <label for="password">Confirmation de mot de passe</label>
+                            <input type="password" class="form-control form-control-lg" name="Confirm Password" id="password2" required="required" placeholder="Confirmez votre mot de passe">
+                        </div>
+                        <div class="form-group mb-4">
+                        <label for="ville">Ville</label>
+                        <input type="text" class="form-control form-control-lg" name="ville" required="required" id="recherche" placeholder="Choisissez votre ville"/>
+                        </div>
+                        <div class="form-group mb-4">
+                        <label for="niveau">Niveau</label>
+                        <select class="form-control form-control-lg" name="niveau" id="niveau">
+                            <option value="débutant">Débutant</option>
+                            <option value="intermédiaire" selected>Intermédiaire</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                        </div>
+                        <button type="submit" value="login" name="logIn" class="btn btn-red btn-lg mt-4">Submit</button>
+                    </form> 
+                </div>
             </div>
-            <div class="agile_its_registration">
-                <form action="#" method="post" class="agile_form" name="subscribe">
-                    <p>Nom</p>
-                    <label>
-                        <input type="text" name="nom" required="required"/>
-                    </label>
-                    <p>Prénom</p>
-                    <label>
-                        <input type="text" name="prenom" required="required"/>
-                    </label>
-                    <p>Email</p>
-                    <label>
-                        <input type="email" name="email" required="required"/>
-                    </label>
-                    <p>Password</p>
-                    <label>
-                        <input type="password" name="password" id="password1" required="required">
-                    </label>
-                    <p>Confirm Password</p>
-                    <label>
-                        <input type="password" name="Confirm Password" id="password2" required="required">
-                    </label>
-                    <p>Ville</p>
-                    <label for="recherche"></label><input type="text" name="ville" required="required" id="recherche"/>
-                    <p>Niveau</p>
-                    <label for="niveau"></label>
-                    <select name="niveau" id="niveau">
-                        <option value="débutant">Débutant</option>
-                        <option value="intermédiaire" selected>Intermédiaire</option>
-                        <option value="expert">Expert</option>
-                    </select>
-                    <input type="submit" value="Signup" name="create"/>
-                </form>
-            </div>
+        </div>
         </div>
     </div>
-    <!-- //Horizontal Tab -->
-</div>
-        </div>
-    </div>
-    </div>
-<div class="agileits_w3layouts_copyright text-center">
-    <p>© 2018 English Battle Inc. All rights reserved | Design by Jouclard</p>
-</div>
+    <footer class="blue-bg text-center p-3">English Battle | &copy; 2018 | Anna & Nicolas</footer>
 <!--tabs-->
 <script src="js/easyResponsiveTabs.js"></script>
 <script type="text/javascript">

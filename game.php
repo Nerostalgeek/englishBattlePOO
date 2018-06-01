@@ -17,21 +17,24 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
     $_SESSION['posts'][] = $_POST['nonce'];
     if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
         $questionManager = new QuestionManager($db);
-        $dateReponse = time();
         if (isset($_POST['envoyer']) && isset($_SESSION['verbe'])) {
-            var_dump("verbe", $_SESSION['currentVerbe']);
-            var_dump("in current verbe id", $_SESSION['verbe'][$_SESSION['currentVerbe']]->id());
-            //var_dump($_SESSION['verbe'][$_SESSION['currentVerbe']]->id());
-            $verbeMananager = new VerbeManager($db);
-            if ($verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse'])) {
-                var_dump($_SESSION['currentVerbe']);
-                $question = new Question(['idPartie' => $_SESSION['partieId'], 'idVerbe' => $_SESSION['verbe'][$_SESSION['currentVerbe']]->id(),
-                    'reponsePreterit' => $_POST['preterit'], 'reponseParticipePasse' => $_POST['participePasse'],
-                    'dateReponse' => $dateReponse]);
-                var_dump($question);
-                $questionManager->add($question);
-                $_SESSION['currentVerbe'] += 1;
+            if (isset($_SESSION['dateEnvoi'])) {
+                $dateEnvoi = $_SESSION['dateEnvoi'];
+                //  var_dump("verbe", $_SESSION['currentVerbe']);
+                //var_dump("in current verbe id", $_SESSION['verbe'][$_SESSION['currentVerbe']]->id());
+                //var_dump($_SESSION['verbe'][$_SESSION['currentVerbe']]->id());
+                $verbeMananager = new VerbeManager($db);
+                if ($verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse'])) {
+                    var_dump($_SESSION['currentVerbe']);
+                    $question = new Question(['idPartie' => $_SESSION['partieId'], 'idVerbe' => $_SESSION['verbe'][$_SESSION['currentVerbe']]->id(),
+                        'reponsePreterit' => $_POST['preterit'], 'reponseParticipePasse' => $_POST['participePasse'],
+                        'dateEnvoi' => $dateEnvoi, 'dateReponse' => time()]);
+                    var_dump($question);
+                    $questionManager->add($question);
+                    $_SESSION['currentVerbe'] += 1;
+                }
             }
+
         }
     }
 } else {

@@ -8,7 +8,7 @@ class Question
     private $_idVerbe;
     private $_reponsePreterit;
     private $_reponseParticipePasse;
-    private $_dateEnvoie;
+    private $_dateEnvoi;
     private $_dateReponse;
 
     public function __construct(array $donnees)
@@ -56,9 +56,9 @@ class Question
         return $this->_reponseParticipePasse;
     }
 
-    public function dateEnvoie()
+    public function dateEnvoi()
     {
-        return $this->_dateEnvoie;
+        return $this->_dateEnvoi;
     }
 
     public function dateReponse()
@@ -69,43 +69,38 @@ class Question
 
     public function setId($id)
     {
-        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_id = (int)$id;
     }
 
     public function setIdPartie($idPartie)
     {
-        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_idPartie = (int)$idPartie;
     }
 
     public function setIdVerbe($idVerbe)
     {
-        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_idVerbe = (int)$idVerbe;
     }
 
     public function setReponsePreterit($reponsePreterit)
     {
-        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_reponsePreterit = $reponsePreterit;
     }
 
     public function setReponseParticipePasse($reponseParticipe)
     {
-        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_reponseParticipePasse = $reponseParticipe;
     }
 
-    public function setDateEnvoie($dateEnvoie)
+    public function setDateEnvoi($dateEnvoi)
     {
-        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
-        $this->_dateEnvoie = $dateEnvoie;
+        session_start();
+        $_SESSION['dateEnvoi'] = time();
+        $this->_dateEnvoi = $dateEnvoi;
     }
 
     public function setDateReponse($dateReponse)
     {
-        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_dateReponse = $dateReponse;
     }
 }

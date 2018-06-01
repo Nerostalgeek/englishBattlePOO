@@ -118,7 +118,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                     <input type="submit" value="login" class="agileinfo" name="logIn"/>
                 </form>
 
-            </div>
+             </div>
             <div class="agile_its_registration">
                 <form action="#" method="post" class="agile_form" name="subscribe">
                     <p>Nom</p>

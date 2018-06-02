@@ -11,6 +11,7 @@ class Partie
 {
     private $_id;
     private $_idJoueur;
+    private $_score;
 
     public function __construct(array $donnees)
     {
@@ -43,6 +44,11 @@ class Partie
         return $this->_idJoueur;
     }
 
+    public function score()
+    {
+        return $this->_score;
+    }
+
 
     public function setId($id)
     {
@@ -54,6 +60,14 @@ class Partie
     {
         // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
         $this->_idJoueur = (int)$idJoueur;
+    }
+
+    public function setScore($score)
+    {
+        session_start();
+        $_SESSION['score'] = 0;
+        // L'identifiant du Joueur sera, quoi qu'il arrive, un nombre entier.
+        $this->_score = (int)$score;
     }
 
 

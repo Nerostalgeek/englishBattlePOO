@@ -6,7 +6,9 @@ require('Class/Partie/PartieManager.php');
 require('Class/Verbe/Verbe.php');
 require('Class/Verbe/VerbeManager.php');
 session_start(); // On appelle session_start() APRÈS avoir enregistré l'autoload.
-
+if (isset($_SESSION['user_id'])){
+    header('Location: ./game.php');
+}
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
 
@@ -24,6 +26,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
     if ($manager->exists($joueur->email())) {
         var_dump($message = 'Cet Email est déjà pris.');
         unset($joueur);
+
     } else {
         // On crée un nouveau Joueur.
         $_SESSION['id'] = $joueur->id();
@@ -32,7 +35,10 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
         $_SESSION['prenom'] = $_POST['prenom'];
         $manager->add($joueur);
     }
-} elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un Joueur.
+
+}
+
+elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un Joueur.
 {
     $joueur = new Joueur(['email' => $_POST['username'], 'password' => $_POST['password']]);
     if ($manager->login($joueur->email(), $joueur->password())) // Si celui-ci existe.
@@ -47,7 +53,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
             $_SESSION['verbe'] = $verbes;
             $_SESSION['currentVerbe'] = 0;
 
-              $_SESSION['partieId'] = $partie->id();
+            $_SESSION['partieId'] = $partie->id();
             header('Location: ./game.php');
 
         }
@@ -118,7 +124,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                     <input type="submit" value="login" class="agileinfo" name="logIn"/>
                 </form>
 
-             </div>
+            </div>
             <div class="agile_its_registration">
                 <form action="#" method="post" class="agile_form" name="subscribe">
                     <p>Nom</p>

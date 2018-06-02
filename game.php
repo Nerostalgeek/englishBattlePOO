@@ -9,29 +9,52 @@ require('Class/Question/QuestionManager.php');
 require('Class/Verbe/Verbe.php');
 require('Class/Verbe/VerbeManager.php');
 session_start();
-
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ./index.php');
+}
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
 if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
     // It is the first time. We add it to the list of "seen" nonces.
     $_SESSION['posts'][] = $_POST['nonce'];
+
     if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
+
         $questionManager = new QuestionManager($db);
+
         if (isset($_POST['envoyer']) && isset($_SESSION['verbe'])) {
+            var_dump("JE SUIS ldksfjqslfjslkqfjlskj");
+            var_dump("DE", $_SESSION['dateEnvoi']);
+
             if (isset($_SESSION['dateEnvoi'])) {
+                echo "WTFFFFF";
                 $dateEnvoi = $_SESSION['dateEnvoi'];
-                //  var_dump("verbe", $_SESSION['currentVerbe']);
-                //var_dump("in current verbe id", $_SESSION['verbe'][$_SESSION['currentVerbe']]->id());
-                //var_dump($_SESSION['verbe'][$_SESSION['currentVerbe']]->id());
                 $verbeMananager = new VerbeManager($db);
+                var_dump("JE SUIS LAAAA");
+
                 if ($verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse'])) {
-                    var_dump($_SESSION['currentVerbe']);
-                    $question = new Question(['idPartie' => $_SESSION['partieId'], 'idVerbe' => $_SESSION['verbe'][$_SESSION['currentVerbe']]->id(),
-                        'reponsePreterit' => $_POST['preterit'], 'reponseParticipePasse' => $_POST['participePasse'],
-                        'dateEnvoi' => $dateEnvoi, 'dateReponse' => time()]);
-                    var_dump($question);
+                    $score = $_SESSION['currentVerbe'];
+
+
+                    var_dump("JE SUIS LAAAA");
+
+                    $question = new Question([
+                        'idPartie' => $_SESSION['partieId'],
+                        'idVerbe' => $_SESSION['verbe'][$_SESSION['currentVerbe']]->id(),
+                        'reponsePreterit' => $_POST['preterit'],
+                        'reponseParticipePasse' => $_POST['participePasse'],
+                        'dateEnvoi' => $dateEnvoi,
+                        'dateReponse' => time()
+                    ]);
+
                     $questionManager->add($question);
                     $_SESSION['currentVerbe'] += 1;
+
+                } else {
+                    $partieManager = new PartieManager($db);
+                    $partie = new Partie(['id' => $_SESSION['partieId'], 'idJoueur' => $_SESSION['user_id'], 'score' => $_SESSION['currentVerbe']]);
+                    $partieManager->update($partie);
+                    $_SESSION['currentVerbe'] = 0;
                 }
             }
 
@@ -73,6 +96,7 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
     <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 </head>
 <body class="bg agileinfo">
+<div id="logout"><a href="logout.php">Logout</a></div>
 <h1 class="agile_head text-center"> <?php echo $_SESSION['email']; ?></h1>
 <div class="w3layouts_main wrap">
     <!--Horizontal Tab-->

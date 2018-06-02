@@ -13,8 +13,9 @@ class PartieManager
     {
 
 
-        $q = $this->_db->prepare('INSERT INTO partie (idJoueur) VALUES(:idJoueur)');
+        $q = $this->_db->prepare('INSERT INTO partie (idJoueur, score) VALUES(:idJoueur, :score)');
         $q->bindValue(':idJoueur', $partie->idJoueur(), PDO::PARAM_INT);
+        $q->bindValue(':score', 0);
 
 
         $q->execute();
@@ -53,9 +54,10 @@ class PartieManager
 
     public function update(Partie $partie)
     {
-        $q = $this->_db->prepare('UPDATE partie SET bestScore = :bestScore WHERE id = :id');
+        $q = $this->_db->prepare('UPDATE partie SET score = :score WHERE id = :id');
 
-        $q->bindValue(':bestScore', $partie->bestScore());
+        $q->bindValue(':id', $partie->id());
+        $q->bindValue(':score', $partie->score());
 
         $q->execute();
     }

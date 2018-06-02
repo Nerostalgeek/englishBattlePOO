@@ -11,6 +11,8 @@ class QuestionManager
 
     public function setDb(PDO $db)
     {
+        session_start();
+        $_SESSION['dateEnvoi'] = time();
         $this->_db = $db;
     }
 
@@ -25,8 +27,6 @@ class QuestionManager
         $q->bindValue(':reponseParticipePasse', $question->reponseParticipePasse());
         $q->bindValue(':dateEnvoi', $question->dateEnvoi());
         $q->bindValue(':dateReponse', $question->dateReponse());
-        var_dump("question date reponse", $question->dateReponse());
-
 
         $q->execute();
         $question->hydrate([
@@ -60,15 +60,6 @@ class QuestionManager
         }
 
         return $question;
-    }
-
-    public function update(Question $question)
-    {
-        $q = $this->_db->prepare('UPDATE question SET bestScore = :bestScore WHERE id = :id');
-
-        $q->bindValue(':bestScore', $question->bestScore());
-
-        $q->execute();
     }
 
     public function exists($info)

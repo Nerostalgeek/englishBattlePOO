@@ -23,20 +23,14 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
         $questionManager = new QuestionManager($db);
 
         if (isset($_POST['envoyer']) && isset($_SESSION['verbe'])) {
-            var_dump("JE SUIS ldksfjqslfjslkqfjlskj");
-            var_dump("DE", $_SESSION['dateEnvoi']);
 
-            if (isset($_SESSION['dateEnvoi'])) {
-                echo "WTFFFFF";
-                $dateEnvoi = $_SESSION['dateEnvoi'];
                 $verbeMananager = new VerbeManager($db);
-                var_dump("JE SUIS LAAAA");
+                $dateEnvoi = $_SESSION['dateEnvoi'];
 
                 if ($verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse'])) {
                     $score = $_SESSION['currentVerbe'];
 
-
-                    var_dump("JE SUIS LAAAA");
+                    $dateReponse = time();
 
                     $question = new Question([
                         'idPartie' => $_SESSION['partieId'],
@@ -44,7 +38,7 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
                         'reponsePreterit' => $_POST['preterit'],
                         'reponseParticipePasse' => $_POST['participePasse'],
                         'dateEnvoi' => $dateEnvoi,
-                        'dateReponse' => time()
+                        'dateReponse' => $dateReponse
                     ]);
 
                     $questionManager->add($question);
@@ -57,9 +51,7 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
                     $_SESSION['currentVerbe'] = 0;
                 }
             }
-
         }
-    }
 } else {
     print '<div class="errormessage">Please do not resubmit.</div>';
 }

@@ -11,8 +11,6 @@ class QuestionManager
 
     public function setDb(PDO $db)
     {
-        session_start();
-        $_SESSION['dateEnvoi'] = time();
         $this->_db = $db;
     }
 

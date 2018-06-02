@@ -94,6 +94,8 @@ class Question
 
     public function setDateEnvoi($dateEnvoi)
     {
+        session_start();
+        $_SESSION['dateEnvoi'] = time();
         $this->_dateEnvoi = $dateEnvoi;
     }
 

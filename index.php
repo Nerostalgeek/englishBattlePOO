@@ -51,20 +51,12 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 }
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>English Battle</title>
+    <title>English Battle Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="application/x-javascript"> addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        } </script>
     <!-- //Bootstrap-Theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- //Custom-theme -->
@@ -72,12 +64,62 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
     <!--// Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Courgette|Montserrat:400,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <img src="img/london-half.jpg" class="img-fluid home-side-image" />
+                <div class="home-side-titles">
+                    <h1>English Battle</h1>
+                    <h2 class="pt-2">Let's test you english level !</h2>
+                </div>
+                <div class="powered-by">Par Anna & Nicolas</div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center align-items-center hp-form p-3">
+                <div>
+                    <h3>Se connecter</h3>
+                    <h4>Entrez vos données d'identification</h4>
+                    <form action="#" method="post" name="login">
+                      <div class="form-row">
+                          <div class="col-12 col-lg-6">
+                            <label for="email" class="sr-only">Email</label>
+                            <div class="input-group shadow-input align-items-center bg-white mb-3">
+                                <input type="email" class="form-control form-control-lg border-0 custom-form" name="email" required="required" placeholder="Entrez votre email">
+                                <i class="fas fa-user form-icon"></i> 
+                            </div>
+                          </div>
+                          <div class="col-12 col-lg-6">
+                            <label for="password" class="sr-only">Mot de passe</label>
+                            <div class="input-group shadow-input align-items-center bg-white mb-3">
+                                <input type="password" class="form-control form-control-lg border-0 custom-form" required="required" placeholder="Entrez votre mot de passe">
+                                <i class="fas fa-lock form-icon"></i> 
+                            </div>
+                          </div>
+                        </div>
+                      <button type="submit" value="login" name="logIn" class="btn btn-blue btn-block custom-btn">Je me connecte !</button>
+                      <small class="form-text">Pas encore de compte ? <strong><a href="signup.php" class="text-blue">Je m'inscris !</a></strong></small>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        } </script>
     <script
             src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
@@ -90,92 +132,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
             });
         });
     </script>
-    <!--// js -->
-    <link rel="stylesheet" type="text/css" href="css/easy-responsive-tabs.css "/>
-    <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
-</head>
-<body>
-    <div class="london-bg container-fluid">
-        <div class="container blur-box">
-            <h1 class="main-title text-center">English Battle</h1>
-            <h2 class="subtitle text-center">Let's test your English Level !</h2>
-        </div>
-    </div>
-    <div class="d-flex">
-        <div class="col-md-4 text-center d-none d-md-block p-0 blue-bg p-5 d-flex align-items-center">
-            <h3>We are English Battle !</h3>
-            <img src="./images/english-flag.jpg" class="img-fluid mt-3 mb-3" alt="english flag"/>
-            <p class="mt-5 text-left">Venez découvrir un jeu éducatif, grâce auquel les verbes irréguliers n'auront plus de secrets pour vous ! Niveau débutant, intermédiaire ou confirmé, venez tester vos connaissances et améliorez vote anglais tout en vous amusant!</p>
-        </div>
-        <div class="col-md-8 d-flex align-items-center">
-            <div class="p-5">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item mr-3">
-                    <a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Se connecter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">S'inscrire</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active pt-4" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
-                    <form action="#" method="post" name="login">
-                        <div class="form-group mb-4">
-                            <label for="email">Adresse Email</label>
-                            <input type="email" class="form-control form-control-lg" name="username" required="required" placeholder="Entrez votre adresse email"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control form-control-lg" name="password" required="required" placeholder="Entrez votre adresse email"/>
-                        </div>
-                            <button type="submit" value="login" name="logIn" class="btn btn-red btn-lg mt-4">Submit</button>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <form action="#" method="post" name="subscribe">
-                        <div class="form-group mb-4">
-                            <label for="nom">Nom</label>
-                            <input type="text" class="form-control form-control-lg" name="nom" required="required" placeholder="Entrez votre nom"/>
-                        </div>
-                        <div class="form-group mb-4">
-                        <label for="prenom">Prénom</label>
-                            <input type="text" class="form-control form-control-lg" name="prenom" required="required" placeholder="Entrez votre prénom"/>
-                        </div>
-                        <div class="form-group mb-4">
-                        <label for="email">Email</label>
-                            <input type="email" class="form-control form-control-lg" name="email" required="required" placeholder="Entrez votre email"/>
-                        </div>
-                        <div class="form-group mb-4">
-                        <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control form-control-lg" name="password" id="password1" required="required" placeholder="Entrez votre mot de passe">
-                        </div>
-                        <div class="form-group mb-4">
-                        <label for="password">Confirmation de mot de passe</label>
-                            <input type="password" class="form-control form-control-lg" name="Confirm Password" id="password2" required="required" placeholder="Confirmez votre mot de passe">
-                        </div>
-                        <div class="form-group mb-4">
-                        <label for="ville">Ville</label>
-                        <input type="text" class="form-control form-control-lg" name="ville" required="required" id="recherche" placeholder="Choisissez votre ville"/>
-                        </div>
-                        <div class="form-group mb-4">
-                        <label for="niveau">Niveau</label>
-                        <select class="form-control form-control-lg" name="niveau" id="niveau">
-                            <option value="débutant">Débutant</option>
-                            <option value="intermédiaire" selected>Intermédiaire</option>
-                            <option value="expert">Expert</option>
-                        </select>
-                        </div>
-                        <button type="submit" value="login" name="logIn" class="btn btn-red btn-lg mt-4">Submit</button>
-                    </form> 
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    <footer class="blue-bg text-center p-3">English Battle | &copy; 2018 | Anna & Nicolas</footer>
-<!--tabs-->
-<script src="js/easyResponsiveTabs.js"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function () {
         //Horizontal Tab
         $('#parentHorizontalTab_agile').easyResponsiveTabs({
@@ -208,10 +165,6 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
             document.getElementById("password2").setCustomValidity('');
         //empty string means no validation error
     }
-
 </script>
-<!--//tabs-->
 </body>
-</html>
-
-
+</html> 

@@ -24,34 +24,35 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
 
         if (isset($_POST['envoyer']) && isset($_SESSION['verbe'])) {
 
-                $verbeMananager = new VerbeManager($db);
-                $dateEnvoi = $_SESSION['dateEnvoi'];
+            $verbeMananager = new VerbeManager($db);
+            $dateEnvoi = $_SESSION['dateEnvoi'];
 
-                if ($verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse'])) {
-                    $score = $_SESSION['currentVerbe'];
+            if ($verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse'], $dateEnvoi, time())) {
+                $score = $_SESSION['currentVerbe'];
 
-                    $dateReponse = time();
+                $dateReponse = time();
 
-                    $question = new Question([
-                        'idPartie' => $_SESSION['partieId'],
-                        'idVerbe' => $_SESSION['verbe'][$_SESSION['currentVerbe']]->id(),
-                        'reponsePreterit' => $_POST['preterit'],
-                        'reponseParticipePasse' => $_POST['participePasse'],
-                        'dateEnvoi' => $dateEnvoi,
-                        'dateReponse' => $dateReponse
-                    ]);
+                $question = new Question([
+                    'idPartie' => $_SESSION['partieId'],
+                    'idVerbe' => $_SESSION['verbe'][$_SESSION['currentVerbe']]->id(),
+                    'reponsePreterit' => $_POST['preterit'],
+                    'reponseParticipePasse' => $_POST['participePasse'],
+                    'dateEnvoi' => $dateEnvoi,
+                    'dateReponse' => $dateReponse
+                ]);
 
-                    $questionManager->add($question);
-                    $_SESSION['currentVerbe'] += 1;
+                $questionManager->add($question);
 
-                } else {
-                    $partieManager = new PartieManager($db);
-                    $partie = new Partie(['id' => $_SESSION['partieId'], 'idJoueur' => $_SESSION['user_id'], 'score' => $_SESSION['currentVerbe']]);
-                    $partieManager->update($partie);
-                    $_SESSION['currentVerbe'] = 0;
-                }
+                $_SESSION['currentVerbe'] += 1;
+
+            } else {
+                $partieManager = new PartieManager($db);
+                $partie = new Partie(['id' => $_SESSION['partieId'], 'idJoueur' => $_SESSION['user_id'], 'score' => $_SESSION['currentVerbe']]);
+                $partieManager->update($partie);
+                $_SESSION['currentVerbe'] = 0;
             }
         }
+    }
 } else {
     print '<div class="errormessage">Please do not resubmit.</div>';
 }

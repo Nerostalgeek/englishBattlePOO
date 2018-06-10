@@ -54,6 +54,7 @@ elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un Joueur.
             $_SESSION['currentVerbe'] = 0;
 
             $_SESSION['partieId'] = $partie->id();
+            $_SESSION['dateEnvoi'] = time();
             header('Location: ./game.php');
 
         }

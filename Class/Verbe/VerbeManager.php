@@ -40,12 +40,16 @@ class VerbeManager
 
     }
 
-    function checkAnswer($preterit, $participe)
+    function checkAnswer($preterit, $participe, $dateReponse, $dateEnvoi)
     {
+        if (!$dateReponse === $dateEnvoi + 11) {
+            print '<div class="timeUpMessage">Vous avez dépassé les 10 secondes pour répondre à la question.</div>';
+            $_SESSION['currentVerbe'] = 0;
+        }
         $query = $this->_db->prepare('SELECT * FROM verbe WHERE preterit = :preterit AND participePasse = :participePasse');
 
         $query->execute([':preterit' => $preterit, ':participePasse' => $participe]);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $query->fetch(PDO::FETCH_ASSOC);
         $count = $query->rowCount();
 
         if ($count == 1) {

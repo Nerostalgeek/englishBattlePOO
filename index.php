@@ -113,14 +113,14 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                           <div class="col-12 col-lg-6">
                             <label for="email" class="sr-only">Email</label>
                             <div class="input-group shadow-input align-items-center bg-white mb-3">
-                                <input type="email" class="form-control form-control-lg border-0 custom-form" name="email" required="required" placeholder="Entrez votre email">
+                                <input type="email" class="form-control form-control-lg border-0 custom-form" name="username" required="required" placeholder="Entrez votre email">
                                 <i class="fas fa-user form-icon"></i> 
                             </div>
                           </div>
                           <div class="col-12 col-lg-6">
                             <label for="password" class="sr-only">Mot de passe</label>
                             <div class="input-group shadow-input align-items-center bg-white mb-3">
-                                <input type="password" class="form-control form-control-lg border-0 custom-form" required="required" placeholder="Entrez votre mot de passe">
+                                <input type="password" class="form-control form-control-lg border-0 custom-form" required="required" placeholder="Entrez votre mot de passe" name="password">
                                 <i class="fas fa-lock form-icon"></i> 
                             </div>
                           </div>
@@ -150,54 +150,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
             src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
             crossorigin="anonymous"></script>
-    <script>
-        $(function () {
 
-            // Single Select
-            $("#recherche").autocomplete({
-                source: function (request, response) {
-                    // Fetch data
-                    $.ajax({
-                        url: "liste.php",
-                        type: 'post',
-                        dataType: "json",
-                        data: {
-                            search: request.term
-                        },
-                        success: function (data) {
-                            response(data);
-                        }
-                    });
-                },
-                select: function (event, ui) {
-                    // Set selection
-                    console.log('UI => => ', ui);
-                    $('#autocomplete').val(ui.item.label); // display the selected text
-                    $('#idVille').val(ui.item.value); // save selected id to input
-                    return false;
-                }
-            });
-        });
-
-    </script>
-    <script type="text/javascript">
-    $(document).ready(function () {
-        //Horizontal Tab
-        $('#parentHorizontalTab_agile').easyResponsiveTabs({
-            type: 'default', //Types: default, vertical, accordion
-            width: 'auto', //auto or any width like 600px
-            fit: true, // 100% fit in a container
-            tabidentify: 'hor_1', // The tab groups identifier
-            activate: function (event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#nested-tabInfo');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
-        });
-    });
-</script>
 <script type="text/javascript">
     window.onload = function () {
         document.getElementById("password1").onchange = validatePassword;

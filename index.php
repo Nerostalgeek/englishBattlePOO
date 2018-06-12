@@ -103,11 +103,33 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 
     <script>
         $(function () {
+
+            // Single Select
             $("#recherche").autocomplete({
-                source: "liste.php",
-                minLength: 3
+                source: function (request, response) {
+                    // Fetch data
+                    $.ajax({
+                        url: "liste.php",
+                        type: 'post',
+                        dataType: "json",
+                        data: {
+                            search: request.term
+                        },
+                        success: function (data) {
+                            response(data);
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    // Set selection
+                    console.log('UI => => ', ui);
+                    $('#autocomplete').val(ui.item.label); // display the selected text
+                    $('#idVille').val(ui.item.value); // save selected id to input
+                    return false;
+                }
             });
         });
+
     </script>
     <!--// js -->
     <link rel="stylesheet" type="text/css" href="css/easy-responsive-tabs.css "/>
@@ -160,7 +182,9 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                         <input type="password" name="Confirm Password" id="password2" required="required">
                     </label>
                     <p>Ville</p>
-                    <label for="recherche"></label><input type="text" name="ville" required="required" id="recherche"/>
+                    <label for="recherche"></label>
+                    <input type="text" name="ville" required="required" id="recherche"/>
+                    <input type="hidden" name="idVille" required="required" id="idVille"/>
                     <p>Niveau</p>
                     <label for="niveau"></label>
                     <select name="niveau" id="niveau">

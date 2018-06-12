@@ -3,6 +3,8 @@ require('Class/Joueur/Joueur.php');
 require('Class/Joueur/JoueurManager.php');
 require('Class/Partie/Partie.php');
 require('Class/Partie/PartieManager.php');
+require('Class/Verbe/Verbe.php');
+require('Class/Verbe/VerbeManager.php');
 session_start(); // On appelle session_start() APRÈS avoir enregistré l'autoload.
 
 $db = new PDO('mysql:host=127.0.0.1;dbname=englishBattle', 'root', 'root');
@@ -20,35 +22,32 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
     if ($manager->exists($joueur->email())) {
         var_dump($message = 'Cet Email est déjà pris.');
         unset($joueur);
+
     } else {
-        // On crée un nouveau Joueur.
-        $_SESSION['id'] = $joueur->id();
-        var_dump("SESSION ID CREATE", $_SESSION['id']);
+
         $_SESSION['email'] = $_POST['username'];
         $_SESSION['prenom'] = $_POST['prenom'];
         $manager->add($joueur);
-
-    }
-} elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un Joueur.
-{
-    $joueur = new Joueur(['email' => $_POST['username'], 'password' => $_POST['password']]);
-    if ($manager->login($joueur->email(), $joueur->password())) // Si celui-ci existe.
-    {
-        $_SESSION['email'] = $_POST['username'];
+        // On crée un nouveau Joueur.
+        $_SESSION['user_id'] = $joueur->id();
         if (isset($_SESSION['user_id'])) {
             $userId = $_SESSION['user_id'];
             $partie = new Partie(['idJoueur' => $userId]);
             $partieManager->add($partie);
+            $verbeManager = new VerbeManager($db);
+            $verbes = $verbeManager->getList();
+            $_SESSION['verbe'] = $verbes;
+            $_SESSION['currentVerbe'] = 0;
+
             $_SESSION['partieId'] = $partie->id();
+            $_SESSION['dateEnvoi'] = time();
             header('Location: ./game.php');
 
         }
-
-    } else {
-        $message = 'Ce Joueur n\'existe pas !'; // S'il n'existe pas, on affichera ce message.
     }
 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -71,36 +70,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 
 </head>
 <body>
-<script>
-    $(function () {
 
-        // Single Select
-        $("#recherche").autocomplete({
-            source: function (request, response) {
-                // Fetch data
-                $.ajax({
-                    url: "liste.php",
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        search: request.term
-                    },
-                    success: function (data) {
-                        response(data);
-                    }
-                });
-            },
-            select: function (event, ui) {
-                // Set selection
-                console.log('UI => => ', ui);
-                $('#autocomplete').val(ui.item.label); // display the selected text
-                $('#idVille').val(ui.item.value); // save selected id to input
-                return false;
-            }
-        });
-    });
-
-</script>
 <div class="container-fluid p-0">
     <div class="row no-gutters">
         <div class="col-lg-6">
@@ -167,6 +137,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                         <div class="input-group shadow-input align-items-center bg-white">
                             <input type="text" class="form-control form-control-lg border-0 custom-form" name="ville"
                                    required="required" id="recherche" placeholder="Entrez votre ville">
+                            <input type="hidden" name="idVille" required="required" id="idVille"/>
                             <i class="fas fa-globe form-icon"></i>
                         </div>
                     </div>
@@ -175,11 +146,11 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                         <select class="input-group shadow-input custom-select bg-white" name="niveau" id="niveau">
                             <option selected>Choisissez votre niveau...</option>
                             <option value="débutant">Débutant</option>
-                            <option value="intermediaire">Intermédiaire</option>
+                            <option value="intermédiaire">Intermédiaire</option>
                             <option value="expert">Confirmé</option>
                         </select>
                     </div>
-                    <button type="submit" value="login" name="logIn" class="btn btn-blue btn-block custom-btn">Je
+                    <button type="submit" value="subscribe" name="create" class="btn btn-blue btn-block custom-btn">Je
                         m'inscris !
                     </button>
                     <small class="form-text">Déjà inscrit ? <strong><a href="index.php" class="text-blue">Je me connecte
@@ -203,6 +174,36 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
+<script>
+    $(function () {
+
+        // Single Select
+        $("#recherche").autocomplete({
+            source: function (request, response) {
+                // Fetch data
+                $.ajax({
+                    url: "liste.php",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        search: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                // Set selection
+                console.log('UI => => ', ui);
+                $('#autocomplete').val(ui.item.label); // display the selected text
+                $('#idVille').val(ui.item.value); // save selected id to input
+                return false;
+            }
+        });
+    });
+
+</script>
 <script type="application/x-javascript"> addEventListener("load", function () {
         setTimeout(hideURLbar, 0);
     }, false);
@@ -215,24 +216,6 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
         crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        //Horizontal Tab
-        $('#parentHorizontalTab_agile').easyResponsiveTabs({
-            type: 'default', //Types: default, vertical, accordion
-            width: 'auto', //auto or any width like 600px
-            fit: true, // 100% fit in a container
-            tabidentify: 'hor_1', // The tab groups identifier
-            activate: function (event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#nested-tabInfo');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
-        });
-    });
-</script>
 
 <script type="text/javascript">
     window.onload = function () {

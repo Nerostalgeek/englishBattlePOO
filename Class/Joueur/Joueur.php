@@ -106,7 +106,7 @@ class Joueur
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->_email = $email;
         } else {
-            var_dump('Cet email a un format non adapté.');
+            var_dump('Cet email a un format non adapté.', $this->_email);
         }
     }
 

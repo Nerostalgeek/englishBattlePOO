@@ -16,40 +16,7 @@ $manager = new JoueurManager($db);
 $partieManager = new PartieManager($db);
 
 
-if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
-{
-
-    $joueur = new Joueur(['nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'email' => $_POST['email'],
-        'password' => $_POST['password'], 'idVille' => intval($_POST['ville']), 'niveau' => $_POST['niveau']]);
-
-    if ($manager->exists($joueur->email())) {
-        var_dump($message = 'Cet Email est déjà pris.');
-        unset($joueur);
-
-    } else {
-
-        $_SESSION['email'] = $_POST['username'];
-        $_SESSION['prenom'] = $_POST['prenom'];
-        $manager->add($joueur);
-        // On crée un nouveau Joueur.
-        $_SESSION['user_id'] = $joueur->id();
-        if (isset($_SESSION['user_id'])) {
-            $userId = $_SESSION['user_id'];
-            $partie = new Partie(['idJoueur' => $userId]);
-            $partieManager->add($partie);
-            $verbeManager = new VerbeManager($db);
-            $verbes = $verbeManager->getList();
-            $_SESSION['verbe'] = $verbes;
-            $_SESSION['currentVerbe'] = 0;
-
-            $_SESSION['partieId'] = $partie->id();
-            $_SESSION['dateEnvoi'] = time();
-            header('Location: ./game.php');
-
-        }
-    }
-
-} elseif (isset($_POST['logIn'])) // Si on a voulu utiliser un Joueur.
+ if (isset($_POST['logIn'])) // Si on a voulu utiliser un Joueur.
 {
     $joueur = new Joueur(['email' => $_POST['username'], 'password' => $_POST['password']]);
     if ($manager->login($joueur->email(), $joueur->password())) // Si celui-ci existe.

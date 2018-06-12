@@ -42,7 +42,7 @@ class VerbeManager
 
     function checkAnswer($preterit, $participe, $dateReponse, $dateEnvoi)
     {
-        if (!$dateReponse === $dateEnvoi + 11) {
+        if ($dateReponse === $dateEnvoi + 11) {
             print '<div class="timeUpMessage">Vous avez dépassé les 10 secondes pour répondre à la question.</div>';
             $_SESSION['currentVerbe'] = 0;
         }

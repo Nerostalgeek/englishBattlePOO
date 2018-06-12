@@ -28,6 +28,6 @@ while ($donnee = $requete->fetch(PDO::FETCH_ASSOC)) // on effectue une boucle po
 }
 
 
-echo json_encode($array); // il n'y a plus qu'à convertir en JSON
+echo json_encode($response); // il n'y a plus qu'à convertir en JSON
 
 ?>

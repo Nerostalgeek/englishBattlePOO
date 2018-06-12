@@ -66,8 +66,6 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
     <link href="//fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
-
 </head>
 <body>
 
@@ -77,7 +75,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
             <img src="img/london-half.jpg" class="img-fluid home-side-image"/>
             <div class="home-side-titles">
                 <h1>English Battle</h1>
-                <h2 class="pt-2">Let's test you english level !</h2>
+                <h2 class="pt-2">Let's test your english level !</h2>
             </div>
             <div class="powered-by">Par Anna & Nicolas</div>
         </div>

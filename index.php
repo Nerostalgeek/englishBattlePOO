@@ -60,14 +60,13 @@ $partieManager = new PartieManager($db);
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
-
     <div class="container-fluid p-0">
         <div class="row no-gutters">
             <div class="col-lg-6">
                 <img src="img/london-half.jpg" class="img-fluid home-side-image" />
                 <div class="home-side-titles">
                     <h1>English Battle</h1>
-                    <h2 class="pt-2">Let's test you english level !</h2>
+                    <h2 class="pt-2">Let's test your english level !</h2>
                 </div>
                 <div class="powered-by">Par Anna & Nicolas</div>
             </div>

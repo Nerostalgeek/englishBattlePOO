@@ -56,6 +56,14 @@ a:hover
 	border-radius: 0;
 	padding: 0.7em 1em;
 }
+#logout
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 5px;
+	z-index: 100;
+}
 
 /*Home left side styles*/
 .home-side-image
@@ -125,6 +133,12 @@ input
 	font-size: 0.8em;
 	font-weight: 700;
 	color: #495057;
+}
+
+/*Timer*/
+#demo
+{
+	font-size: 4em;
 }
 
 @media (min-width: 768px) {

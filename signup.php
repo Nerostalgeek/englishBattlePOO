@@ -74,7 +74,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 				<img src="img/london-half.jpg" class="img-fluid home-side-image" />
 				<div class="home-side-titles">
 					<h1>English Battle</h1>
-					<h2 class="pt-2">Let's test you english level !</h2>
+					<h2 class="pt-2">Let's test your english level !</h2>
 				</div>
 				<div class="powered-by">Par Anna & Nicolas</div>
 			</div>
@@ -138,7 +138,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 							<option value="expert">Confirmé</option>
 						</select>
 					  </div>
-					  <button type="submit" value="login" name="logIn" class="btn btn-blue btn-block custom-btn">Je m'inscris !</button>
+					  <button type="submit" value="Signup" name="create" class="btn btn-blue btn-block custom-btn">Je m'inscris !</button>
 					  <small class="form-text">Déjà inscrit ? <strong><a href="index.php" class="text-blue">Je me connecte !</a></strong></small>
 					</form>
 				</div>

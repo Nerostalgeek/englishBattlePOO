@@ -74,7 +74,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                 <img src="img/london-half.jpg" class="img-fluid home-side-image" />
                 <div class="home-side-titles">
                     <h1>English Battle</h1>
-                    <h2 class="pt-2">Let's test you english level !</h2>
+                    <h2 class="pt-2">Let's test your english level !</h2>
                 </div>
                 <div class="powered-by">Par Anna & Nicolas</div>
             </div>
@@ -87,14 +87,14 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                           <div class="col-12 col-lg-6">
                             <label for="email" class="sr-only">Email</label>
                             <div class="input-group shadow-input align-items-center bg-white mb-3">
-                                <input type="email" class="form-control form-control-lg border-0 custom-form" name="email" required="required" placeholder="Entrez votre email">
+                                <input type="email" class="form-control form-control-lg border-0 custom-form" name="username" required="required" placeholder="Entrez votre email">
                                 <i class="fas fa-user form-icon"></i> 
                             </div>
                           </div>
                           <div class="col-12 col-lg-6">
                             <label for="password" class="sr-only">Mot de passe</label>
                             <div class="input-group shadow-input align-items-center bg-white mb-3">
-                                <input type="password" class="form-control form-control-lg border-0 custom-form" required="required" placeholder="Entrez votre mot de passe">
+                                <input type="password" class="form-control form-control-lg border-0 custom-form" required="required" placeholder="Entrez votre mot de passe" name="password">
                                 <i class="fas fa-lock form-icon"></i> 
                             </div>
                           </div>

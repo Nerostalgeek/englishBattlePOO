@@ -101,7 +101,8 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
                     <p>Base verbale</p>
                     <label>
                         <input type="text" id="baseVerbale" name="baseVerbale" required="required"
-                               value="<?php echo $_SESSION['verbe'][$_SESSION['currentVerbe']]->baseVerbale() ?>"
+                               value="<?php echo $_SESSION['verbe'][$_SESSION['currentVerbe']]->baseVerbale()
+                               ?>"
                                disabled/>
                     </label>
                     <p>Preterit</p>

@@ -111,7 +111,6 @@ class JoueurManager
         $query = $this->_db->prepare('SELECT * FROM Joueur WHERE email = :email AND password = :password');
 
         $query->execute([':email' => $username, ':password' => $password]);
-        //var_dump("really => =>", $query->fetchColumn());
         $result = $query->fetch(PDO::FETCH_ASSOC);
         $count = $query->rowCount();
 

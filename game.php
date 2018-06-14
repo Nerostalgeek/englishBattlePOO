@@ -29,7 +29,7 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
             $score = $_SESSION['currentVerbe'];
 
 
-            if ($_dateReponse > ($_dateEnvoi + 10) || $verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse'], $_dateEnvoi, $_dateReponse) === false) {
+            if ($_dateReponse > ($_dateEnvoi + 10) || $verbeMananager->checkAnswer($_POST['preterit'], $_POST['participePasse']) === false) {
                 $partieManager = new PartieManager($db);
                 $partie = new Partie(['id' => $_SESSION['partieId'], 'idJoueur' => $_SESSION['user_id'], 'score' => $_SESSION['currentVerbe']]);
                 $partieManager->update($partie);

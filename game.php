@@ -18,6 +18,7 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
     $_SESSION['posts'][] = $_POST['nonce'];
 
     if (isset($_SESSION['user_id']) && isset($_SESSION['partieId'])) {
+        $score = 0;
 
         $questionManager = new QuestionManager($db);
 
@@ -37,6 +38,7 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
 
 
             } else {
+                $score = $_SESSION['currentVerbe'] + 1;
 
                 $partieManager = new PartieManager($db);
                 $partie = new Partie(['id' => $_SESSION['partieId'], 'idJoueur' => $_SESSION['user_id'], 'score' => $_SESSION['currentVerbe']]);

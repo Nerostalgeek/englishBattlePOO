@@ -17,7 +17,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 {
 
     $joueur = new Joueur(['nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'email' => $_POST['email'],
-        'password' => $_POST['password'], 'idVille' => intval($_POST['ville']), 'niveau' => $_POST['niveau']]);
+        'password' => $_POST['password'], 'idVille' => intval($_POST['idVille']), 'niveau' => $_POST['niveau']]);
 
     if ($manager->exists($joueur->email())) {
         var_dump($message = 'Cet Email est déjà pris.');
@@ -135,7 +135,7 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
                         <div class="input-group shadow-input align-items-center bg-white">
                             <input type="text" class="form-control form-control-lg border-0 custom-form" name="ville"
                                    required="required" id="recherche" placeholder="Entrez votre ville">
-                            <input type="hidden" name="idVille" required="required" id="idVille"/>
+                            <input type="hidden" name="idVille" required="required" id="idVille" value=""/>
                             <i class="fas fa-globe form-icon"></i>
                         </div>
                     </div>
@@ -177,24 +177,12 @@ if (isset($_POST['create'])) // Si on a voulu créer un Joueur.
 
         // Single Select
         $("#recherche").autocomplete({
-            source: function (request, response) {
-                // Fetch data
-                $.ajax({
-                    url: "liste.php",
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        search: request.term
-                    },
-                    success: function (data) {
-                        response(data);
-                    }
-                });
-            },
+            source: "liste.php"
+            ,
             select: function (event, ui) {
                 // Set selection
                 console.log('UI => => ', ui);
-                $('#autocomplete').val(ui.item.label); // display the selected text
+                $('#recherche').val(ui.item.label); // display the selected text
                 $('#idVille').val(ui.item.value); // save selected id to input
                 return false;
             }

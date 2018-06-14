@@ -28,7 +28,6 @@ class Partie
 
             if (method_exists($this, $method)) {
                 // On appelle le setter.
-                //var_dump("in baby",$this->$method($value));
                 $this->$method($value);
             }
         }

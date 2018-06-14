@@ -116,7 +116,7 @@ class Joueur
         if ($ville) {
             trim($this->_ville = $ville, '"');
         } else {
-            var_dump('probleme ville');
+            var_dump('Problème lors de la selection de la ville');
         }
     }
 

@@ -113,7 +113,8 @@ if (!in_array($_POST['nonce'], $_SESSION['posts'])) {
                 </form>
             </div>
         </div>
-        <div class="col-lg-6 d-flex justify-content-center align-items-center">
+        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+            <h1 class="text-blue mb-3"> Score: <?php echo $score; ?> !</h1>
             <progress value="0" max="10" id="timer"></progress>
         </div>
     </div>
